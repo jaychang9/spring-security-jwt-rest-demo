@@ -1,7 +1,5 @@
 package com.thomasvitale.security.service;
 
-import static java.util.Collections.emptyList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +14,8 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
+import java.util.Collections;
+
 @Service
 public class TokenAuthenticationServiceImpl implements TokenAuthenticationService {
 	
@@ -25,7 +25,7 @@ public class TokenAuthenticationServiceImpl implements TokenAuthenticationServic
 	 * When a user successfully logs into the application, create a token for that user.
 	 * 
 	 * @param res		An http response that will be filled with an 'Authentication' header containing the token.
-	 * @param username	The username mapped to the user.
+	 * @param authentication	The username mapped to the user.
 	 */
 	@Override
 	public void addAuthentication(HttpServletResponse res, Authentication authentication) {
@@ -41,11 +41,11 @@ public class TokenAuthenticationServiceImpl implements TokenAuthenticationServic
 	 * The JWTAuthenticationFilter calls this method to verify the user authentication.
 	 * If the token is not valid, the authentication fails and the request will be refused.
 	 * 
-	 * @param request	An http request that will be check for authentication token to verify.
+	 * @param request    An http request that will be check for authentication token to verify.
 	 * @return
 	 */
 	@Override
-	public Authentication getAuthentication(HttpServletRequest request) {
+	public UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 		
 		String token = request.getHeader(tokenHandler.HEADER_STRING);
 		
@@ -68,7 +68,7 @@ public class TokenAuthenticationServiceImpl implements TokenAuthenticationServic
 			}
 			
 			if (user != null) {
-				return new UsernamePasswordAuthenticationToken(user, null, emptyList());
+				return new UsernamePasswordAuthenticationToken(Collections.emptyList(), user, null);
 			} else {
 				return null;
 			}

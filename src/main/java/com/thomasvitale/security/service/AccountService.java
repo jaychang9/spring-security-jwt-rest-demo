@@ -1,7 +1,5 @@
 package com.thomasvitale.security.service;
 
-import static java.util.Collections.emptyList;
-
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.thomasvitale.model.Account;
 import com.thomasvitale.security.repository.AccountRepository;
+
+import java.util.Collections;
 
 @Service("userDetailsService")
 public class AccountService implements UserDetailsService {
@@ -34,7 +34,7 @@ public class AccountService implements UserDetailsService {
 		}
 		
 		// User(username, password, enabled, accountNonExpired, credentialsNotExpired, accountNonLocked, authorities)
-		User user = new User(account.getUsername(), account.getPassword(), account.isEnabled(), true, true, true, emptyList());
+		User user = new User(account.getUsername(), account.getPassword(), account.isEnabled(), true, true, true, Collections.EMPTY_LIST);
 				
 		detailsChecker.check(user);
 

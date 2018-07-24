@@ -3,6 +3,7 @@ package com.thomasvitale.security.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
 public interface TokenAuthenticationService {
@@ -19,9 +20,9 @@ public interface TokenAuthenticationService {
 	 * The JWTAuthenticationFilter calls this method to verify the user authentication.
 	 * If the token is not valid, the authentication fails and the request will be refused.
 	 * 
-	 * @param request	An http request that will be check for authentication token to verify.
+	 * @param request    An http request that will be check for authentication token to verify.
 	 * @return
 	 */
-	Authentication getAuthentication(HttpServletRequest request);
+	UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request);
 
 }
