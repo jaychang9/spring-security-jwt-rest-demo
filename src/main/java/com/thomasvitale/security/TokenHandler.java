@@ -31,7 +31,7 @@ public class TokenHandler {
 
         Date now = new Date();
 
-        String JWT = Jwts.builder()
+        String jwt = Jwts.builder()
                 .setId(UUID.randomUUID().toString())
                 .setSubject(username)
                 .setIssuedAt(now)
@@ -40,7 +40,7 @@ public class TokenHandler {
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
 
-        return JWT;
+        return jwt;
 
     }
 
