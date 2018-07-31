@@ -33,7 +33,7 @@ public class TokenAuthenticationServiceImpl implements TokenAuthenticationServic
 		String user = authentication.getName();
 		
 		String JWT = tokenHandler.build(user);
-		
+		// 将jwt token放到响应头
 		res.addHeader(tokenHandler.HEADER_STRING, tokenHandler.TOKEN_PREFIX + " " + JWT);
 	}
 	

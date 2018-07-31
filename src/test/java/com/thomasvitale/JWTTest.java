@@ -41,4 +41,11 @@ public class JWTTest {
 
 
     }
+
+    @Test
+    public void test2(){
+        JwtBuilder jwtBuilder = Jwts.builder();
+
+
+    }
 }

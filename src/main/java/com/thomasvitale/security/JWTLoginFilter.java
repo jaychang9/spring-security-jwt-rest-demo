@@ -54,4 +54,10 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
         tokenAuthenticationService.addAuthentication(res, auth);
     }
 
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().println("{\"code\":40001,\"message:\":\"Unauthorized\"}");
+    }
 }
